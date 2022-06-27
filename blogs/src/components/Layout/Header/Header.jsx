@@ -21,7 +21,16 @@ const Header = () => {
           </Link>
         </li>
       </ul>
-      <button className={styles.btn}>Logout</button>
+
+      <Link
+        to="/"
+        className={styles.btn}
+        onClick={() => {
+          localStorage.removeItem("isLoggedIn");
+        }}
+      >
+        Logout
+      </Link>
     </header>
   );
 };

@@ -37,6 +37,7 @@ const SignIn = () => {
       let exist = matchUser.length > 0 ? true : false;
       setUserExist(exist);
       if (exist) {
+        localStorage.setItem("isLoggedIn", true);
         navigate("/home");
       }
     } catch (err) {

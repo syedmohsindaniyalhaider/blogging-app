@@ -21,7 +21,8 @@
   background-color: #f9bc60;
   color: #001e1d;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 8px 15px;
+  border-radius: 20px;
   cursor: pointer;
+  text-decoration: none;
 }

@@ -32,7 +32,6 @@ const SignInForm = ({
     e.preventDefault();
     loadUsers();
     if (userExist) {
-      localStorage.setItem("email", email);
       resetEmail();
       resetPassword();
     }

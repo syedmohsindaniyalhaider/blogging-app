@@ -8,6 +8,8 @@ import PageNotFound from "./components/PageNotFound/PageNotFound";
 import SignIn from "./components/Register/SignIn/SignIn";
 import SignUp from "./components/Register/SignUp/SignUp";
 function App() {
+  let isLoggedIn = localStorage.getItem("isLoggedIn");
+  console.log(isLoggedIn);
   return (
     <Routes>
       <Route path="/" exact element={<Register />}>
