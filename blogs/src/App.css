@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.input {
+  padding: 7px 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  width: 250px;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid #001e1d;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
