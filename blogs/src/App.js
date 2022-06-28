@@ -1,6 +1,8 @@
 import "./App.css";
 import Main from "./components/Layout/Main/Main";
 import Home from "./components/Home/Home";
+import Blogs from "./components/Blogs/Blogs";
+import Contact from "./components/Contact/Contact";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Register from "./components/Register/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -18,6 +20,8 @@ function App() {
       </Route>
       <Route exact element={<Main />}>
         <Route exact path="home" element={<Home />} />
+        <Route exact path="blogs" element={<Blogs />} />
+        <Route exact path="contact" element={<Contact />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
       <Route path="/dashboard" element={<Dashboard />} />

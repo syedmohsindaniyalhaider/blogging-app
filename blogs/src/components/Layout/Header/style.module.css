@@ -13,8 +13,13 @@
 }
 
 .link {
+  font-weight: bold;
   color: #abd1c6;
   text-decoration: none;
+}
+
+.link:hover {
+  color: white;
 }
 
 .btn {
