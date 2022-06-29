@@ -1,0 +1,33 @@
+.header {
+  background-color: #004643;
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  list-style-type: none;
+  gap: 20px;
+}
+
+.link {
+  font-weight: bold;
+  color: #abd1c6;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: white;
+}
+
+.btn {
+  background-color: #f9bc60;
+  color: #001e1d;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
