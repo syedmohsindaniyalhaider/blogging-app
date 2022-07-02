@@ -11,6 +11,9 @@ let detailSchema = new Schema(
     paragraph: {
       type: String,
     },
+    blogImage: {
+      type: String,
+    },
   },
   {
     collection: "blogs",

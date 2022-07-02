@@ -6,8 +6,8 @@ var mongoose = require("mongoose");
 const port = 3001;
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
 
 let blogsSchema = require("./models/blogs-model");
@@ -36,6 +36,7 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.post("/blogs", (req, res) => {
+  // console.log(req.body);
   blogsSchema.create(req.body, (error, data) => {
     if (error) {
       return next(error);
@@ -44,6 +45,20 @@ app.post("/blogs", (req, res) => {
       res.json(data);
     }
   });
+});
+
+/// blogsSchema.create(req.body)
+
+app.get("/blogs", (req, res) => {
+  db.collection("blogs")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
 });
 
 // respond with "hello world" when a GET request is made to the homepage
