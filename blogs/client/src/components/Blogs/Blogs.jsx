@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FileBase64 from "react-file-base64";
 import useInput from "../../hooks/use-input";
 import styles from "./style.module.css";
 
@@ -28,16 +29,13 @@ const Blogs = () => {
     reset: resetParagraph,
   } = useInput((value) => value.trim() !== "");
 
-  const formIsValid = titleIsValid && subTitle;
-
-  const handleChange = (e) => {
-    setFile(URL.createObjectURL(e.target.files[0]));
-  };
+  const formIsValid = titleIsValid && subTitleIsValid;
 
   const blogDetail = {
     title: title,
     subTitle: subTitle,
     paragraph: paragraph,
+    blogImage: file,
   };
 
   const blogHTTP = async () => {
@@ -50,9 +48,11 @@ const Blogs = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    console.log(file);
     blogHTTP();
     resetTitle();
     resetSubTitle();
+    setFile("");
     resetParagraph();
   };
 
@@ -96,11 +96,12 @@ const Blogs = () => {
           <div>
             <label htmlFor="blogImage">Upload Image</label>
             <div className={styles.mt}>
-              <input
+              <FileBase64
                 type="file"
-                onChange={handleChange}
-                className={styles.file}
+                multiple={false}
                 name="blogImage"
+                className={styles.file}
+                onDone={({ base64 }) => setFile(base64)}
               />
             </div>
             {file && (
