@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import styles from "./style.module.css";
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
@@ -16,22 +17,42 @@ const Home = () => {
 
   return (
     <>
-      {blogs.map((item) => (
-        <>
-          <div key={item.id}>
-            <strong>Title:</strong> {item.title}
+      <div className={styles.categories}>
+        <ul className={styles.list}>
+          <li className={styles.listHead}>
+            <strong>Categories</strong>
+          </li>
+          <li className={styles.item}>
+            <Link to="">All</Link>
+          </li>
+          <li className={styles.item}>
+            <Link to="">Latest</Link>
+          </li>
+          <li className={styles.item}>
+            <Link to="">Popular</Link>
+          </li>
+        </ul>
+      </div>
+      <div className={styles.container}>
+        {blogs.map((item) => (
+          <div key={item.id} className={styles.card}>
+            {item.blogImage && (
+              <img src={item.blogImage} className={styles.image} />
+            )}
+            <div className={styles.cardContent}>
+              <div>
+                <strong>Title:</strong> {item.title}
+              </div>
+              <div>
+                <strong>Sub Title:</strong> {item.subTitle}
+              </div>
+              <div>
+                <strong>Paragraph:</strong> {item.paragraph}
+              </div>
+            </div>
           </div>
-          <div>
-            <strong>Sub Title:</strong> {item.subTitle}
-          </div>
-          <div>
-            <strong>Paragraph:</strong> {item.paragraph}
-          </div>
-          <div>
-            {item.blogImage && <img src={item.blogImage} height="100" />}
-          </div>
-        </>
-      ))}
+        ))}
+      </div>
     </>
   );
 };
