@@ -1,6 +1,5 @@
-.container {
-  margin-top: -165px;
-  padding: 0 400px;
+.unlikeHeart {
+  filter: invert(1) grayscale(1);
 }
 
 .card {
@@ -17,10 +16,20 @@
 }
 
 .cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border: 1px solid rgba(193, 193, 193, 0.774);
   padding: 20px !important;
+}
+
+.comment {
+  margin: 10px 0 0 0;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(193, 193, 193, 0.774);
 }
 
 .categories {
