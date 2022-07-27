@@ -37,7 +37,7 @@ const Home = () => {
         {blogs.map((item) => (
           <div key={item.id} className={styles.card}>
             {item.blogImage && (
-              <img src={item.blogImage} className={styles.image} />
+              <img src={item.blogImage} className={styles.image} alt=""/>
             )}
             <div className={styles.cardContent}>
               <div>
