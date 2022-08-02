@@ -1,8 +1,8 @@
+// import heart from "../../heart.png";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./style.module.css";
-// import heart from "../../heart.png";
 import { Container } from "@mui/system";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -16,10 +16,6 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
 
 const Home = () => {
   // const [likeHeart, setLikeHeart] = useState(false);
@@ -53,23 +49,7 @@ const Home = () => {
           </li>
         </ul>
       </div>
-      <Container maxWidth="sm">
-        <List component="nav" aria-label="mailbox folders">
-          <ListItem button>
-            <ListItemText primary="Inbox" />
-          </ListItem>
-          <Divider />
-          <ListItem button divider>
-            <ListItemText primary="Drafts" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Trash" />
-          </ListItem>
-          <Divider light />
-          <ListItem button>
-            <ListItemText primary="Spam" />
-          </ListItem>
-        </List>
+      <Container maxWidth="sm" sx={{ marginTop: "-100px", minHeight: "85vh" }}>
         {blogs.map((item) => (
           <Card key={item.id} variant="outlined" sx={{ marginBottom: "50px" }}>
             <CardHeader
@@ -102,10 +82,10 @@ const Home = () => {
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
+              <IconButton>
                 <FavoriteIcon />
               </IconButton>
-              <IconButton aria-label="share">
+              <IconButton>
                 <ShareIcon />
               </IconButton>
             </CardActions>

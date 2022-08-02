@@ -3,7 +3,7 @@ import Main from "./components/Layout/Main/Main";
 import Home from "./components/Home/Home";
 import Blogs from "./components/Blogs/Blogs";
 import Contact from "./components/Contact/Contact";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Register from "./components/Register/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
