@@ -16,6 +16,7 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { OutlinedInput } from "@mui/material";
 
 const Home = () => {
   // const [likeHeart, setLikeHeart] = useState(false);
@@ -89,6 +90,9 @@ const Home = () => {
                 <ShareIcon />
               </IconButton>
             </CardActions>
+            <CardContent>
+              <OutlinedInput placeholder="Enter a comment..." fullWidth />
+            </CardContent>
           </Card>
         ))}
       </Container>
