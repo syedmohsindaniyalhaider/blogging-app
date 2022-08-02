@@ -86,9 +86,8 @@ const Header = (props) => {
               }}
             >
               {pages.map((page) => (
-                <Link to={page.link} className={styles.link}>
+                <Link key={page.name} to={page.link} className={styles.link}>
                   <Button
-                    key={page.name}
                     onClick={handleCloseNavMenu}
                     sx={{
                       my: 2,

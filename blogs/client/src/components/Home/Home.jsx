@@ -52,7 +52,7 @@ const Home = () => {
       </div>
       <Container maxWidth="sm" sx={{ marginTop: "-100px", minHeight: "85vh" }}>
         {blogs.map((item) => (
-          <Card key={item.id} variant="outlined" sx={{ marginBottom: "50px" }}>
+          <Card key={item._id} variant="outlined" sx={{ marginBottom: "50px" }}>
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
