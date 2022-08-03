@@ -21,6 +21,7 @@ import { OutlinedInput } from "@mui/material";
 const Home = () => {
   // const [likeHeart, setLikeHeart] = useState(false);
   const [blogs, setBlogs] = useState([]);
+  const [comment, setComment] = useState("");
   const fetchBlogs = async () => {
     const response = await fetch("http://localhost:3001/blogs");
     const data = await response.json();
@@ -91,7 +92,12 @@ const Home = () => {
               </IconButton>
             </CardActions>
             <CardContent>
-              <OutlinedInput placeholder="Enter a comment..." fullWidth />
+              <OutlinedInput
+                value={comment}
+                placeholder="Enter a comment..."
+                onChange={(e) => setComment(e.target.value)}
+                fullWidth
+              />
             </CardContent>
           </Card>
         ))}
