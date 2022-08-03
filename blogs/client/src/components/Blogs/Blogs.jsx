@@ -108,7 +108,12 @@ const Blogs = () => {
                   />
                 </div>
                 {file && (
-                  <img src={file} height="100" className={styles.blogImage} />
+                  <img
+                    src={file}
+                    height="100"
+                    className={styles.blogImage}
+                    alt=""
+                  />
                 )}
               </div>
               <div>
@@ -137,7 +142,7 @@ const Blogs = () => {
         </div>
         <div className={`${styles.container}`}>
           <div className={styles.card}>
-            <img src={file || defaultImage} className={styles.image} />
+            <img src={file || defaultImage} className={styles.image} alt="" />
             <div className={styles.cardContent}>
               <div>
                 <strong>Title:</strong> {title || "Enter Title"}
