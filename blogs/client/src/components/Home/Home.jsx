@@ -1,9 +1,9 @@
+// import heart from "../../heart.png";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./style.module.css";
-import heart from "../../heart.png";
-import { Box, Container } from "@mui/system";
+import { Container } from "@mui/system";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -16,13 +16,10 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
+import { OutlinedInput } from "@mui/material";
 
 const Home = () => {
-  const [likeHeart, setLikeHeart] = useState(false);
+  // const [likeHeart, setLikeHeart] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const fetchBlogs = async () => {
     const response = await fetch("http://localhost:3001/blogs");
@@ -53,25 +50,9 @@ const Home = () => {
           </li>
         </ul>
       </div>
-      <Container maxWidth="sm">
-        <List component="nav" aria-label="mailbox folders">
-          <ListItem button>
-            <ListItemText primary="Inbox" />
-          </ListItem>
-          <Divider />
-          <ListItem button divider>
-            <ListItemText primary="Drafts" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Trash" />
-          </ListItem>
-          <Divider light />
-          <ListItem button>
-            <ListItemText primary="Spam" />
-          </ListItem>
-        </List>
+      <Container maxWidth="sm" sx={{ marginTop: "-100px", minHeight: "85vh" }}>
         {blogs.map((item) => (
-          <Card key={item.id} variant="outlined" sx={{ marginBottom: "50px" }}>
+          <Card key={item._id} variant="outlined" sx={{ marginBottom: "50px" }}>
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -102,13 +83,16 @@ const Home = () => {
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
+              <IconButton>
                 <FavoriteIcon />
               </IconButton>
-              <IconButton aria-label="share">
+              <IconButton>
                 <ShareIcon />
               </IconButton>
             </CardActions>
+            <CardContent>
+              <OutlinedInput placeholder="Enter a comment..." fullWidth />
+            </CardContent>
           </Card>
         ))}
       </Container>

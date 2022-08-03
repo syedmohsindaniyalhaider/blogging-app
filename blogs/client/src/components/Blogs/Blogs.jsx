@@ -3,6 +3,7 @@ import FileBase64 from "react-file-base64";
 import useInput from "../../hooks/use-input";
 import styles from "./style.module.css";
 import defaultImage from "../../default-blog.png";
+import { Container } from "@mui/material";
 
 const Blogs = () => {
   const [file, setFile] = useState("");
@@ -58,7 +59,7 @@ const Blogs = () => {
   };
 
   return (
-    <>
+    <Container maxWidth="xl" sx={{ minHeight: "85vh" }}>
       <div className={styles.flex}>
         <div>
           <h2 className={styles.mb}>Create your Blog</h2>
@@ -110,9 +111,9 @@ const Blogs = () => {
                 {file && (
                   <img
                     src={file}
+                    alt=""
                     height="100"
                     className={styles.blogImage}
-                    alt=""
                   />
                 )}
               </div>
@@ -157,7 +158,7 @@ const Blogs = () => {
           </div>
         </div>
       </div>
-    </>
+    </Container>
   );
 };
 
