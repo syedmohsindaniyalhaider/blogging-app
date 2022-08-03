@@ -21,11 +21,32 @@ import { OutlinedInput } from "@mui/material";
 const Home = () => {
   // const [likeHeart, setLikeHeart] = useState(false);
   const [blogs, setBlogs] = useState([]);
+  const [comment, setComment] = useState("");
   const fetchBlogs = async () => {
     const response = await fetch("http://localhost:3001/blogs");
     const data = await response.json();
     console.log(data);
     setBlogs(data);
+  };
+
+  const comments = {
+    comment: comment,
+  };
+  const commentsHTTP = async (blogId) => {
+    await fetch(`http://localhost:3001/${blogId}/comments`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(comments),
+    }).catch((err) => console.error(err));
+    await fetch(`http://localhost:3001/${blogId}/comments`).catch((err) =>
+      console.error(err)
+    );
+    setComment("");
+  };
+
+  const handleComments = (blogId) => {
+    comments.blogId = blogId;
+    commentsHTTP(blogId);
   };
 
   useEffect(() => {
@@ -71,6 +92,7 @@ const Home = () => {
               component="img"
               image={item.blogImage}
               alt="Paella dish"
+              height="400"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -91,7 +113,13 @@ const Home = () => {
               </IconButton>
             </CardActions>
             <CardContent>
-              <OutlinedInput placeholder="Enter a comment..." fullWidth />
+              <OutlinedInput
+                placeholder="Enter a comment..."
+                value={comment}
+                onKeyUp={(e) => e.key === "Enter" && handleComments(item._id)}
+                onChange={(e) => setComment(e.target.value)}
+                fullWidth
+              />
             </CardContent>
           </Card>
         ))}
