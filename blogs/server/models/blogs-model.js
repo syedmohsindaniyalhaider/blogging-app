@@ -14,6 +14,7 @@ let detailSchema = new Schema(
     blogImage: {
       type: String,
     },
+    comments: [{ type: Schema.Types.ObjectId, ref: "comments-model" }],
   },
   {
     collection: "blogs",
