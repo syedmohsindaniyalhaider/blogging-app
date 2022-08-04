@@ -1,8 +1,8 @@
+// import heart from "../../heart.png";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./style.module.css";
-// import heart from "../../heart.png";
 import { Container } from "@mui/system";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -16,19 +16,37 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
+import { OutlinedInput } from "@mui/material";
 
 const Home = () => {
   // const [likeHeart, setLikeHeart] = useState(false);
   const [blogs, setBlogs] = useState([]);
+  const [comment, setComment] = useState("");
   const fetchBlogs = async () => {
     const response = await fetch("http://localhost:3001/blogs");
     const data = await response.json();
     console.log(data);
     setBlogs(data);
+  };
+
+  const comments = {
+    comment: comment,
+  };
+  const commentsHTTP = async (blogId) => {
+    await fetch(`http://localhost:3001/${blogId}/comments`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(comments),
+    }).catch((err) => console.error(err));
+    await fetch(`http://localhost:3001/${blogId}/comments`).catch((err) =>
+      console.error(err)
+    );
+    setComment("");
+  };
+
+  const handleComments = (blogId) => {
+    comments.blogId = blogId;
+    commentsHTTP(blogId);
   };
 
   useEffect(() => {
@@ -53,25 +71,9 @@ const Home = () => {
           </li>
         </ul>
       </div>
-      <Container maxWidth="sm">
-        <List component="nav" aria-label="mailbox folders">
-          <ListItem button>
-            <ListItemText primary="Inbox" />
-          </ListItem>
-          <Divider />
-          <ListItem button divider>
-            <ListItemText primary="Drafts" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Trash" />
-          </ListItem>
-          <Divider light />
-          <ListItem button>
-            <ListItemText primary="Spam" />
-          </ListItem>
-        </List>
+      <Container maxWidth="sm" sx={{ marginTop: "-100px", minHeight: "85vh" }}>
         {blogs.map((item) => (
-          <Card key={item.id} variant="outlined" sx={{ marginBottom: "50px" }}>
+          <Card key={item._id} variant="outlined" sx={{ marginBottom: "50px" }}>
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -90,6 +92,7 @@ const Home = () => {
               component="img"
               image={item.blogImage}
               alt="Paella dish"
+              height="400"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -102,13 +105,22 @@ const Home = () => {
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
+              <IconButton>
                 <FavoriteIcon />
               </IconButton>
-              <IconButton aria-label="share">
+              <IconButton>
                 <ShareIcon />
               </IconButton>
             </CardActions>
+            <CardContent>
+              <OutlinedInput
+                placeholder="Enter a comment..."
+                value={comment}
+                onKeyUp={(e) => e.key === "Enter" && handleComments(item._id)}
+                onChange={(e) => setComment(e.target.value)}
+                fullWidth
+              />
+            </CardContent>
           </Card>
         ))}
       </Container>

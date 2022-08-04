@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
 
 let blogsSchema = require("./models/blogs-model");
+let commentsSchema = require("./models/comments-model");
 
 //Set up default mongoose connection
 var mongoDB = "mongodb://localhost:27017/blogging-db";
@@ -35,8 +36,10 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+// post a blogs
+// /blogs
+
 app.post("/blogs", (req, res) => {
-  // console.log(req.body);
   blogsSchema.create(req.body, (error, data) => {
     if (error) {
       return next(error);
@@ -47,11 +50,41 @@ app.post("/blogs", (req, res) => {
   });
 });
 
-/// blogsSchema.create(req.body)
+// get all blogs
+// /blogs
 
 app.get("/blogs", (req, res) => {
   db.collection("blogs")
     .find({})
+    .toArray(function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+});
+
+// post a comment
+// /blogId/comments
+app.post("/:id/comments", (req, res, next) => {
+  console.log("Here===>", req.body);
+  commentsSchema.create(req.body, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      console.log(data);
+      res.json(data);
+    }
+  });
+});
+
+// get all comments of related blogId
+// /blogId/comments
+
+app.get("/:id/comments", (req, res, next) => {
+  db.collection("blog-comments")
+    .find({ blogId: req.params.id })
     .toArray(function (err, result) {
       if (err) {
         console.log(err);
